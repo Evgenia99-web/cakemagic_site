@@ -1,0 +1,10 @@
+{% load static %}
+<div class="profile_aside">
+    <div class="profile_info_small">
+        <div class="profile_info_small_text">
+            <p class="profile_username">{{ user.last_name }} {{ user.first_name }}</p>
+            <a href="{% url 'edit_profile' %}" class="edit_profile_link">Редактировать профиль</a>
+        </div>
+        <img src="{{ user.userprofile.image.url }}" class="profile_info_small_img" alt="avatar">
+    </div>
+</div>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="container post_info_block">
+        <div class="post_info">
+            <img src="{{ post_info.image_post.url }}" class="post_info_img" alt="">
+            <div class="user_info_post">
+                <div class="user_info">
+                    <p class="user_info_name">{{ post_info.cooker.username }}</p>
+                    <p class="post_date_publish">{{ post_info.created_on.date }}</p>
+                </div>
+                {% if user.is_authenticated and user.username != 'admin' %}
+                    <a href="{% url 'post_fav' post_info.id %}">
+                        <img src="{% if fav %}{% static 'img/dislike.png' %}{% else %}{% static 'img/like.png' %}{% endif %}" class="like" alt="like">
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="post_content">
+            <p class="post_title top_name">{{ post_info.title }}</p>
+            <p class="post_descript">{{ post_info.content }}</p>
+        </div>
+
+    </div>
+{% endblock base %}

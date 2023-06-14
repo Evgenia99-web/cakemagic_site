@@ -1,0 +1,23 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+    <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="donat_posts">
+            <p class="profile_title">Редактирование публикации</p>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <form method="POST" class="retrieve_form edit_form" enctype="multipart/form-data">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                <button type="submit" class="save_btn">Сохранить публикацию</button>
+            </form>
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

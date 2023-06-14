@@ -1,0 +1,57 @@
+{% load static %}
+<header>
+    <div class="container header">
+      <div class="white_left_side">
+          <div class="mobile_menu">
+            <input class="side-menu" type="checkbox" id="side-menu"/>
+            <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+            <!-- Menu -->
+            <nav class="nav">
+                <ul class="menu">
+                    <a href="/" class="white_nav_item">Главная</a>
+                    <a href="{% url 'about' %}" class="white_nav_item">О портале</a>
+                    <a href="{% url 'cookers' %}" class="white_nav_item">Кондитеры</a>
+                    <a href="{% url 'recipes' %}" class="white_nav_item">Рецепты</a>
+                    <a href="{% url 'posts' %}" class="white_nav_item">Публикации</a>
+                </ul>
+            </nav>
+          </div>
+        <div class="nav_left_side">
+          <a href="/" class="white_nav_item">Главная</a>
+          <a href="{% url 'about' %}" class="white_nav_item">О портале</a>
+          <a href="{% url 'cookers' %}" class="white_nav_item">Кондитеры</a>
+        </div>
+        <div class="left_side_name">
+          <p class="white_main_name left_name">MAGIC</p>
+        </div>
+      </div>
+      <div class="logo_center">
+        <a href="/">
+          <img src="{% static 'img/logo_white.png' %}" class="logo white" alt="логотип Magoc Cake">
+        </a>
+      </div>
+      <div class="white_right_side">
+        <div class="right_side_name">
+          <p class="white_main_name right_name">CAKE</p>
+        </div>
+        <div class="nav_right_side">
+          <a href="{% url 'recipes' %}" class="white_nav_item">Рецепты</a>
+          <a href="{% url 'posts' %}" class="white_nav_item">Публикации</a>
+        </div>
+        <div class="profiles_block">
+            {% if user.is_authenticated and user.username != 'admin' %}
+              <a href="{% url 'profile' %}" class="profile">
+                <img src="{% static 'img/user_auth_white.png' %}" class="profile_icon_gray" alt="Профиль">
+              </a>
+            {% else %}
+              <a href="{% url 'register' %}" class="profile">
+                <img src="{% static 'img/profile_white.png' %}" class="profile_icon_gray" alt="Профиль">
+              </a>
+            {% endif %}
+          <a href="{% url 'cart' %}" class="cart">
+            <img src="{% static 'img/cart_white.png' %}" class="cart_icon_gray" alt="Корзина">
+          </a>
+        </div>
+      </div>
+    </div>
+</header>

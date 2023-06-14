@@ -1,0 +1,22 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+        <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="donat_posts">
+            <p class="profile_title">Ваши рецепты</p>
+            <div class="add_filter">
+                <a href="{% url 'add_recipe' %}" class="add_new">Добавить новый  +</a>
+            </div>
+            <div class="posts_list">
+                {% for recipe in recipe_list %}
+                    <div class="posts_list_item">
+                        <img src="{{ recipe.image_recipe.url }}" class="post_poster" alt="">
+                        <a href="{% url 'recipe_detail' recipe.id %}" class="go_to_post">Перейти</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

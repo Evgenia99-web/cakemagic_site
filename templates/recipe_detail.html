@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="container recipe_info_block">
+        <div class="info_recipe" style="background: url('{{ recipe_info.image_recipe.url }}') no-repeat center; background-size: cover;">
+            <div class="recipe_info_about">
+                {% if user.is_authenticated and user.username != 'admin' %}
+                    <a href="{% url 'recipe_fav' recipe_info.id %}">
+                        <img src="{% if fav %}{% static 'img/dislike_brown.png' %}{% else %}{% static 'img/like_brown.png' %}{% endif %}" class="like" alt="like">
+                    </a>
+                {% endif %}
+                <h2 class="recipe_title">{{ recipe_info.name }}</h2>
+                <div class="recipe_about">
+                    <div class="author_info">
+                        <img src="{% static 'img/author.png' %}" class="author_icon" alt="">
+                        <p class="author_name">{{ recipe_info.user.first_name }} {{ recipe_info.user.last_name }}</p>
+                    </div>
+                    <p class="recipe_publish">{{ recipe_info.created_on.date }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="recipe_links">
+            <a href="{{ recipe_info.doc_recipe.url }}" class="download_link">Скачать рецепт</a>
+        </div>
+
+
+    </div>
+{% endblock base %}

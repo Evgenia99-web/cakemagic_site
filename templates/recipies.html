@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="cookers_top">
+        <div class="container">
+          <h1 class="home_title blue">Рецепты</h1>
+        </div>
+        <div class="container cooker_list_block">
+          <div class="post_list">
+              {% for recipe in page_obj %}
+                  <div class="post_item post_item_page">
+                      <img src="{{ recipe.image_recipe.url }}" class="post_item_img" alt="">
+                      <a href="{% url 'recipe_single' recipe.id %}" class="main_go_to">Перейти</a>
+                  </div>
+              {% endfor %}
+          </div>
+        </div>
+    </div>
+{% endblock base %}

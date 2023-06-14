@@ -1,0 +1,24 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+    <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="donat_posts recipe_block">
+            <p class="profile_title title_detail">Название: {{ recipe_info.name}}</p>
+            <div class="another_info recipe_info">
+                <img src="{{ recipe_info.image_recipe.url }}" class="post_detail_img" alt="">
+                <div class="another_info_text">
+                    <p class="date_publish type_name">Категория: {{ recipe_info.category.cat_name }}</p>
+                    <p class="date_publish type_name">Тип: {{ recipe_info.type.type_name }}</p>
+                    <a href="{{ recipe_info.doc_recipe.url }}" class="doc_recipe" target="_blank">Ссылка на рецепт</a>
+                    <p class="status rec {% if recipe_info.get_status_display == 'Опубликовано' %}publish{% elif recipe_info.get_status_display == 'Черновик' %}draft{% else %}moderator{% endif %}">{{ recipe_info.get_status_display }}</p>
+                </div>
+            </div>
+            <div class="btn_choice">
+                <a href="{% url 'delete_recipe' recipe_info.id %}" class="delete_btn">Удалить рецепт</a>
+                <a href="{% url 'edit_recipe' recipe_info.id %}" class="edit_btn">Редактировать рецепт</a>
+            </div>
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

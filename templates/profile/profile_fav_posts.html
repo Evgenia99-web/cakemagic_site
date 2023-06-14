@@ -1,0 +1,28 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+        <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="donat_posts">
+            <p class="profile_title">Любимые публикации</p>
+            {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+            {% else %}
+            <div class="fav_post_list">
+                {% for post in fav_posts %}
+                    <div class="post_list_item">
+                        <a href="{% url 'post_single' post.id %}" class="post_link">{{ post.post.title }}</a>
+                        <a href="{% url 'delete_fav_post' post.id %}"><img src="{% static 'img/delete_cart.png' %}" class="del_link" alt=""></a>
+                    </div>
+                {% endfor %}
+            </div>
+                <a href="{% url 'delete_fav_post_all' %}" class="delete_btn">Удалить все</a>
+            {% endif %}
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

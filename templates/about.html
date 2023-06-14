@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+        <div class="about_info">
+          <img src="{% static 'img/cake_left.png' %}" class="cake_left" alt="">
+          <div class="container about_info_block">
+            <h1 class="home_title">О портале</h1>
+            <p class="about_info_text">
+              Любите делать необычные и индивидуальные подарки, которые запомнятся надолго? Или хотите сделать
+              сладкий вкусный подарок Вашим близким и родным, находясь за тысячи километров от них? Портал Magic Cake поможет
+              Вам легко и просто найти кондитера в своем городе, который осуществит задуманное и доставит сюрприз лично в руки!
+            </p>
+            <p class="about_info_text">
+              На портале Вы можете выбрать кондитера и заказать торт на любое торжество – день рождения детей и взрослых, свадьбу,
+              профессиональный праздник или корпоратив. Кондитеры делают торты любой сложности по образцу или индивидуальным пожеланиям.
+              Все тортики являются ручной работой!
+            </p>
+            <p class="about_info_text">
+              Портал Magic Cake представляет сервис поиска кондитера в любом городе России, которые зарегистрированы на портале.
+              В профиле кондитера Вы можете найти примеры его работ, авторские рецепты и публикации, а также вы можете напрямую
+              сделать заказ у понравившегося кондитера, рассчитав примерную цену за торт прямо на сайте.
+            </p>
+            <p class="about_info_text">
+              Вкуснейшие и красивые тортики становятся изюминкой любого праздника :) <br>
+              Выбирайте и заказывайте тортики ручной работы!
+            </p>
+          </div>
+          <img src="{% static 'img/cake_right.png' %}" class="cake_right" alt="">
+        </div>
+        <div class="useful_info">
+          <img src="{% static 'img/cake_left.png' %}" class="cake_left_use" alt="">
+          <div class="container useful_info_block">
+            <h1 class="home_title">Полезная информация</h1>
+            <h2 class="second_title">Для кого портал</h2>
+            <div class="whos_block">
+              <div class="customer_block">
+                <img src="{% static 'img/customer.png' %}" class="customer_icon" alt="">
+                <p class="customer_name">Заказчик может: </p>
+                <ul class="customer_can">
+                  <li class="customer_can_item">Найти и выбрать кондитера</li>
+                  <li class="customer_can_item">Рассчитать примерную стоимость торта</li>
+                  <li class="customer_can_item">Оформить заказ у кондитера на сайте</li>
+                  <li class="customer_can_item">Оставить отзыв и оценку о работе кондитера</li>
+                </ul>
+              </div>
+              <div class="cooker_block">
+                <img src="{% static 'img/cooker.png' %}" class="cooker_icon" alt="">
+                <p class="customer_name">Кондитер может: </p>
+                <ul class="cooker_can">
+                  <li class="cooker_can_item">Вести учет расходов и доходов</li>
+                  <li class="cooker_can_item">Принимать заказы</li>
+                  <li class="cooker_can_item">Добавлять товары, рецепты, публикации </li>
+                  <li class="cooker_can_item">Редактировать товары, рецепты, публикации</li>
+                </ul>
+              </div>
+            </div>
+            <h2 class="second_title">Как правильно рассчитать необходимый вес торта</h2>
+            <img src="{% static 'img/weight.png' %}" class="cake_weight_icon" alt="">
+            <p class="cake_weight_text about_info_text">
+              Дизайнерские торты намного тяжелее магазинных, за счет использования натуральных начинок, добавления фруктов,
+              орехов, покрытия сверху кремом и украшениями. Срок годности тортов: 72 часа.
+              Итоговый вес торта точно рассчитать нельзя, в итоге он может колебаться в пределах 500 грамм.
+            </p>
+          </div>
+          <img src="{% static 'img/cake_right.png' %}" class="cake_right_use" alt="">
+        </div>
+{% endblock base %}

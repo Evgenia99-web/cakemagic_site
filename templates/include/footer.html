@@ -1,0 +1,42 @@
+{% load static %}
+<footer>
+    <div class="container">
+      <div class="footer_logo_block">
+        <div class="footer_left_side">
+          <div class="left_side_name">
+            <p class="footer_main_name left_name">MAGIC</p>
+          </div>
+        </div>
+        <div class="logo_center">
+          <a href="{% url 'home' %}">
+            <img src="{% static 'img/logo_white.png' %}" class="logo white" alt="логотип Magoc Cake">
+          </a>
+        </div>
+        <div class="footer_right_side">
+          <div class="right_side_name">
+            <p class="footer_main_name right_name">CAKE</p>
+          </div>
+        </div>
+      </div>
+      <div class="footer_nav_block">
+        <div class="footer_nav">
+          <div class="footer_nav_left">
+            <a href="{% url 'home' %}" class="footer_nav_item">Главная</a>
+            <a href="{% url 'about' %}" class="footer_nav_item">О портале</a>
+            <a href="{% url 'cookers' %}" class="footer_nav_item">Кондитеры</a>
+          </div>
+          <div class="footer_nav_right">
+            <a href="{% url 'recipes' %}" class="footer_nav_item">Рецепты</a>
+            <a href="{% url 'posts' %}" class="footer_nav_item">Публикации</a>
+          </div>
+        </div>
+        <div class="footer_poster">
+          <img src="{% static 'img/footer_img.png' %}" class="footer_img" alt="Картинка торта">
+        </div>
+        <div class="footer_info">
+          <p class="footer_info_item">Для сотрудничества обращаться на почту <a href="mailto:proximastar@yandex.ru">proximastar@yandex.ru</a></p>
+          <p class="footer_info_item">&copy Все права защищены 2023 </p>
+        </div>
+      </div>
+    </div>
+</footer>

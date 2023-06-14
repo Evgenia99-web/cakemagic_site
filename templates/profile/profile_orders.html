@@ -1,0 +1,33 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+        <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="donat_posts">
+            <p class="profile_title">Ваши заказы</p>
+            <div class="fav_post_list">
+                {% if user.is_cooker %}
+                {% for order in orders %}
+                    <div class="post_list_item">
+                        <p class="post_link">{{ order.customer.first_name }}</p>
+                        <p class="post_link">{{ order.city }}</p>
+                        <p class="post_link">{{ order.get_delivery_display }}</p>
+                        <a href="{% url 'change_status' order.id %}"><p class="post_link">{{ order.get_status_display }}</p></a>
+                        <p class="post_link">{{ order.created.date }}</p>
+                    </div>
+                {% endfor %}
+                {% else %}
+                    {% for order in orders %}
+                    <div class="post_list_item">
+                        <p class="post_link">{{ order.cooker.first_name }}</p>
+                        <p class="post_link">{{ order.get_delivery_display }}</p>
+                        <p class="post_link">{{ order.get_status_display }}</p>
+                        <p class="post_link">{{ order.updated.date }}</p>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

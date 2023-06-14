@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="container">
+        <div class="cooker_info">
+            <div class="cooker_ava">
+              <div class="rating_detail">
+                <img src="{% static 'img/heart.png' %}" class="heart_img_detail" alt="">
+                <p class="count_detail">5.0</p>
+              </div>
+              <img src="{{ cooker_info.userprofile.image.url }}" class="cooker_photo_detail" alt="">
+            </div>
+            <div class="cooker_info_text">
+              <p class="cooker_name_detail">{{ cooker_info.last_name}} {{ cooker_info.first_name }}</p>
+              <p class="cooker_location">{{ cooker_info.userprofile.country }}, {{ cooker_info.userprofile.city }}</p>
+              <p class="cooker_descript">{{ cooker_info.userprofile.description }}</p>
+            </div>
+        </div>
+        <div class="cooker_tab">
+            <div class="wrapper">
+                <div class="tabs cooker_tabs">
+                    <div class="tab">
+                      <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+                      <label for="tab-1" class="tab-label cooker_label first_label">Товары</label>
+                      <div class="tab-content cooker_content">
+                        <div class="filter_block">
+                            <form method="POST" class="form_filter">
+                                {% csrf_token %}
+                                    {{ filter.as_div }}
+                                <button type="submit" class="filter_btn">Найти</button>
+                            </form>
+                        </div>
+                          <div class="goods_list">
+                              {% for good in page_obj1 %}
+                                    <div class="good_item post_item_page">
+                                        <img src="{{ good.image_good.url }}" class="post_item_img" alt="">
+                                        <a href="{% url 'good_single' good.id good.user.id %}" class="main_go_to">Перейти</a>
+                                    </div>
+                              {% endfor %}
+                          </div>
+                      </div>
+                    </div>
+                    <div class="tab">
+                      <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
+                      <label for="tab-2" class="tab-label cooker_label second_label">Публикации</label>
+                      <div class="tab-content cooker_content">
+                        <div class="goods_list">
+                            {% for post in page_obj2 %}
+                                <div class="good_item post_item_page">
+                                    <img src="{{ post.image_post.url }}" class="post_item_img" alt="">
+                                    <a href="{% url 'post_single' post.id %}" class="main_go_to">Перейти</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab">
+                      <input type="radio" name="css-tabs" id="tab-3" class="tab-switch">
+                      <label for="tab-3" class="tab-label cooker_label third_label">Отзывы</label>
+                      <div class="tab-content cooker_content">
+                        {% if messages %}
+                                    {% for message in messages %}
+                                        <div class="alert alert-{{ message.tags }}">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                        {% else %}
+                        <div class="feed_list">
+                            {% for feed in page_obj4 %}
+                                <div class="feed_item">
+                                    <div class="feed_head">
+                                        <div class="feed_person">
+                                            <img src="{{ feed.customer.userprofile.image.url }}" class="person_img" alt="">
+                                            <p class="person_name">{{ feed.customer.first_name }} {{ feed.customer.last_name }}</p>
+                                        </div>
+                                        <p class="publish_date">{{ feed.created_on.date }}</p>
+                                    </div>
+                                    <p class="comment_text">{{ feed.comment }}</p>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                      </div>
+                    </div>
+                    <div class="tab">
+                      <input type="radio" name="css-tabs" id="tab-4" class="tab-switch">
+                      <label for="tab-4" class="tab-label cooker_label forth_label">Рецепты</label>
+                      <div class="tab-content cooker_content">
+                          <div class="filter_block">
+                                <form method="POST" class="form_filter">
+                                    {% csrf_token %}
+                                        {{ filter.as_div }}
+                                    <button type="submit" class="filter_btn">Найти</button>
+                                </form>
+                          </div>
+                          <div class="goods_list">
+                            {% for recipe in page_obj3 %}
+                                <div class="good_item post_item_page">
+                                    <img src="{{ recipe.image_recipe.url }}" class="post_item_img" alt="">
+                                    <a href="#" class="main_go_to">Перейти</a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock base %}

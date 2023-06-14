@@ -1,0 +1,52 @@
+{% load static %}
+<header class="profile_header {% if user.is_cooker == True %} cooker_page {% endif %}">
+    <div class="profile_logo">
+        <a href="/"><img src="{% static 'img/logo_profile.png' %}" class="logo_profile" alt=""></a>
+    </div>
+    <div class="profile_nav">
+        {% if user.is_cooker == True %}
+            <a href="{% url 'profile' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_home.png' %}" class="menu_icon" alt="Главная">
+            </a>
+            <a href="{% url 'profile_posts' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_post.png' %}" class="menu_icon" alt="Посты">
+            </a>
+            <a href="{% url 'profile_goods' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_goods.png' %}" class="menu_icon" alt="Товары">
+            </a>
+            <a href="{% url 'profile_recipes' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_recipe.png' %}" class="menu_icon" alt="Рецепты">
+            </a>
+            <a href="#" class="profile_nav_item">
+                <img src="{% static 'img/menu_feedback.png' %}" class="menu_icon" alt="Отзывы">
+            </a>
+            <a href="#" class="profile_nav_item">
+                <img src="{% static 'img/menu_salary.png' %}" class="menu_icon" alt="Доходы">
+            </a>
+            <a href="{% url 'profile_orders' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_order.png' %}" class="menu_icon" alt="Заказы">
+            </a>
+        {% else %}
+            <a href="{% url 'profile' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_home.png' %}" class="menu_icon" alt="Главная">
+            </a>
+            <a href="{% url 'profile_fav_posts' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_post.png' %}" class="menu_icon" alt="Посты">
+            </a>
+            <a href="{% url 'profile_fav_recipes' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_recipe.png' %}" class="menu_icon" alt="Рецепты">
+            </a>
+            <a href="#" class="profile_nav_item">
+                <img src="{% static 'img/menu_feedback.png' %}" class="menu_icon" alt="Отзывы">
+            </a>
+            <a href="{% url 'profile_orders' %}" class="profile_nav_item">
+                <img src="{% static 'img/menu_order.png' %}" class="menu_icon" alt="Заказы">
+            </a>
+        {% endif %}
+    </div>
+    <div class="logout">
+        <a href="{% url 'logout' %}" class="profile_nav_item">
+            <img src="{% static 'img/logout.png' %}" class="menu_icon" alt="Выход">
+        </a>
+    </div>
+</header>

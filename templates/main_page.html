@@ -1,0 +1,142 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+              <div class="slider slide1">
+                    <div class="slide_flex container">
+                      <div class="slide_info">
+                        <h1 class="slide_title">
+                            Кондитеры с радостью делятся с вами своими авторскими рецептами.
+                            С ними вы почувствуете себя кондитером
+                        </h1>
+                        <a href="#" class="slide_btn">Посмотреть все</a>
+                      </div>
+                      <div class="slide_poster">
+                        <img src="{% static 'img/slide1.png' %}" class="slide_img" alt="Картинка слайда">
+                      </div>
+                    </div>
+                </div>
+          </div>
+          <div class="swiper-slide">
+              <div class="slider slide2">
+                    <div class="slide_flex container">
+                      <div class="slide_info">
+                        <h1 class="slide_title">
+                           Магия рождает вкусные шедевры на кухне кондитера.
+                            Убедитесь сами, как они это делают в их постах
+                        </h1>
+                        <a href="{% url 'posts' %}" class="slide_btn">Посмотреть все</a>
+                      </div>
+                      <div class="slide_poster">
+                        <img src="{% static 'img/slide2.png' %}" class="slide_img" alt="Картинка слайда">
+                      </div>
+                    </div>
+              </div>
+          </div>
+          <div class="swiper-slide">
+              <div class="slider slide3">
+                    <div class="slide_flex container">
+                      <div class="slide_info">
+                        <h1 class="slide_title">
+                            Здесь Вы сможете найти лучшего для себя кондитера
+                            в своем городе легко и просто. Все кондитеры в одном месте
+                        </h1>
+                        <a href="{% url 'cookers' %}" class="slide_btn">Посмотреть все</a>
+                      </div>
+                      <div class="slide_poster">
+                        <img src="{% static 'img/slide3.png' %}" class="slide_img" alt="Картинка слайда">
+                      </div>
+                    </div>
+              </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <div class="interesting container">
+        <h1 class="home_title">Интересное от кондитеров</h1>
+        <div class="tabs_block">
+            <div class="wrapper">
+              <div class="tabs">
+                <div class="tab">
+                  <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+                  <label for="tab-1" class="tab-label left_label">Рецепты</label>
+                  <div class="tab-content">
+                      <div class="post_list">
+                        {% for recipe in recipe_list %}
+                            <div class="recipe_item">
+                                <img src="{{ recipe.image_recipe.url }}" class="post_item_img" alt="">
+                                <a href="{% url 'recipe_single' recipe.id %}" class="main_go_to">Перейти</a>
+                            </div>
+                        {% endfor %}
+                      </div>
+                      <a href="{% url 'recipes' %}" class="all_btn">Посмотреть все</a>
+                  </div>
+                </div>
+                <div class="tab">
+                  <input type="radio" name="css-tabs" id="tab-2" class="tab-switch">
+                  <label for="tab-2" class="tab-label right_label">Публикации</label>
+                  <div class="tab-content">
+                    <div class="post_list">
+                        {% for post in post_list %}
+                            <div class="post_item">
+                                <img src="{{ post.image_post.url }}" class="post_item_img" alt="">
+                                <a href="{% url 'post_single' post.id %}" class="main_go_to">Перейти</a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'posts' %}" class="all_btn">Посмотреть все</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+    <img src="{% static 'img/donat_left.png' %}" class="left_banner_img" alt="">
+    <div class="banner_info">
+      <p class="banner_info_text">Здесь Вы легко найдете легко найдете кондитера в своем городе</p>
+      <a href="{% url 'cookers' %}" class="banner_info_btn">Найти кондитера</a>
+    </div>
+    <img src="{% static 'img/donat_right.png' %}" class="right_banner_img" alt="">
+  </div>
+    <div class="feedback container">
+        <h1 class="home_title">Отзывы заказчиков</h1>
+        <div class="swiper mySwiper2">
+        <div class="swiper-wrapper">
+            {% for feedback in feedbacks %}
+                <div class="swiper-slide">
+                    <div class="slider_feed">
+                            <div class="slide_head">
+                                <img src="{{ feedback.customer.userprofile.image.url }}" class="slide_photo" alt="">
+                                <p class="slide_name">{{ feedback.customer.last_name }} {{ feedback.customer.first_name }}</p>
+                            </div>
+                            <p class="slide_cooker">Кондитер: {{ feedback.cooker.last_name }} {{ feedback.cooker.first_name }}</p>
+                            <p class="comment">{{ feedback.comment }}</p>
+                            <p class="date">Дата отзыва: {{ feedback.created_on.date }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    </div>
+    <script>
+        var swiper = new Swiper(".mySwiper2", {
+          spaceBetween: 20,
+          slidesPerView: '2',
+          autoplay:{
+            delay:7000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          },
+          navigation: {
+              nextEl: '.custom-next',
+              prevEl: '.custom-prev',
+          },
+            mousewheel: true,
+          keyboard: true,
+        });
+    </script>
+{% endblock content %}

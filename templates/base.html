@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  </head>
+  <body>
+  <div id="page" class="page"><!-- mian-content -->
+      {% block header %}
+          {% include "include/header.html" %}
+      {% endblock header %}
+      {% block base %}
+
+      {% endblock base %}
+      {% block footer %}
+          {% include "include/footer.html" %}
+      {% endblock footer %}
+  </div>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      spaceBetween: 0,
+      pagination: {
+        el: ".swiper-pagination", clickable: true,
+      },
+        autoplay:{
+        delay:7000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
+      },
+      mousewheel: true,
+      keyboard: true,
+    });
+  </script>
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+        <div class="welcome_block">
+            <div class="welcome_text">
+                <p class="welcome_title">Здравствуйте, <span class="welcome_name">{{ user.first_name }}</span></p>
+                <p class="welcome_wish">Хорошего настроения Вам!</p>
+            </div>
+            <img src="{% static 'img/donat_profile.png' %}" class="welcome_image" alt="">
+        </div>
+        <div class="statistic_block">
+            <p class="profile_title">Статистика</p>
+            <div class="statistic_list">
+                {% if user.is_cooker == True %}
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/order_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name purple">Выполненные заказы</p>
+                        <p class="statistic_count purple">{{ orders_cooker }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/feedback_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name darkred">Количество отзывов</p>
+                        <p class="statistic_count darkred">{{ feed_cook }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/reting_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name yellow raiting_text">Ваш рейтинг</p>
+                        <p class="statistic_count yellow">{{ raiting }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/goods_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name blue">Количество товаров</p>
+                        <p class="statistic_count blue">{{ count_user_goods }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/salary_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name green">Текущая выручка</p>
+                        <p class="statistic_count green">0</p>
+                    </div>
+                {% else %}
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/order_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name purple">Выполненные заказы</p>
+                        <p class="statistic_count purple">{{ orders_custom }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/feedback_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name darkred">Количество отзывов</p>
+                        <p class="statistic_count darkred">{{ feed_cust }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/post_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name yellow">Любимые публикации</p>
+                        <p class="statistic_count yellow">{{ count_posts }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/recipe_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name blue">Любимые рецепты</p>
+                        <p class="statistic_count blue">{{ count_recipes }}</p>
+                    </div>
+                    <div class="statistic_list_item">
+                        <img src="{% static 'img/sale_main.png' %}" class="statistic_img" alt="">
+                        <p class="statistic_name green">Персональная скидка</p>
+                        <p class="statistic_count green">0</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock profile %}

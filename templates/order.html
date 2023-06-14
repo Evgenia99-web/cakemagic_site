@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="cart_block container">
+        <h1 class="home_title">Оформление заказа</h1>
+        <div class="form_titles">
+            <p>Контактные данные</p>
+            <p>Детали заказа</p>
+        </div>
+        <form method="POST" class="order_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="order_form_block">
+                {{ order_form.as_div }}
+            </div>
+            <div class="order_block">
+                <p class="order_info_title">Ваш заказ</p>
+                {% for basket in baskets %}
+                    <div class="order_item">
+                        <div class="product_basket">
+                            <img src="{{ basket.product.image_good.url }}" class="product_basket_img" alt="">
+                            <p class="product_basket_name">{{ basket.product.type.type_name }} "{{ basket.product.name }}"</p>
+                        </div>
+                        <p class="filling_basket">Начинка:<br> {{ basket.filling.name }}</p>
+                        <p class="count_product_basket">Вес / Количество:<br> {{ basket.quantity }}</p>
+                        <p class="total_price_product">{{ basket.sum }} Р</p>
+                    </div>
+                {% endfor %}
+                <p class="pay_info_order">
+                    Оплата заказа осуществляется после уточнения информации о декоре и внешнем виде. Как правило производится
+                    предоплата 50% - 100% или оплата день в день в зависимости от условий кондитера. Способ оплаты кондитер
+                    также озвучит вам при уточнении деталей.
+                </p>
+                <div class="order_item">
+                    <p class="total_price_title">Предварительная сумма заказа</p>
+                    <p class="total_table_price">{{ total_sum }} Р</p>
+                </div>
+            </div>
+            <button type="submit" class="checkout_btn">Оформить заказ</button>
+        </form>
+    </div>
+{% endblock base %}

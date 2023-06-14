@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="cookers_top">
+        <img src="{% static 'img/left_hand.png' %}" class="left_hand" alt="">
+        <div class="container cookers_top_block">
+          <h1 class="home_title purple">Кондитеры</h1>
+          <p class="top_name">Топ кондитеров</p>
+          <div class="top_block">
+            <div class="second_place">
+              <div class="photo_place">
+                <img src="{% static 'img/olga.jpg' %}" class="cook_photo" alt="">
+                <p class="place">2</p>
+              </div>
+              <p class="cook_name">Шишова Ольга</p>
+              <p class="cook_city">Москва</p>
+            </div>
+            <div class="first_place">
+              <div class="photo_place">
+                <img src="{% static 'img/polina.jpg' %}" class="cook_photo" alt="">
+                <p class="place">1</p>
+              </div>
+              <p class="cook_name">Филимонова Полина</p>
+              <p class="cook_city">Москва</p>
+            </div>
+            <div class="third_place">
+              <div class="photo_place">
+                <img src="{% static 'img/nacty.jpg' %}" class="cook_photo" alt="">
+                <p class="place">3</p>
+              </div>
+              <p class="cook_name">Лазарева Анастасия</p>
+              <p class="cook_city">Москва</p>
+            </div>
+          </div>
+        </div>
+        <div class="container cooker_list_block">
+          <div class="cooker_filter">
+            <form method="post" class="filter_form">
+                {% csrf_token %}
+              <div class="filter_form_item">
+                    <label for="city">Город</label>
+                    <input name="city" type="text" id="city" placeholder="Введите город"/>
+              </div>
+              <button class="search_btn">Найти</button>
+            </form>
+          </div>
+            <div class="cooker_list">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% for cooker in page_obj %}
+                        <div class="cooker_item">
+                            <div class="rating">
+                                <img src="{% static 'img/heart.png' %}" class="heart_img" alt="">
+                                <p class="count">5.0</p>
+                            </div>
+                            <img src="{{ cooker.userprofile.image.url }}" class="cooker_photo" alt="">
+                            <p class="cooker_name">{{ cooker.last_name}} {{ cooker.first_name}}</p>
+                            <a href="{% url 'cooker_single' cooker.id %}" class="go_to">Перейти</a>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+        <img src="{% static 'img/right_hand.png' %}" class="right_hand" alt="">
+    </div>
+{% endblock base %}

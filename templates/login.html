@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  </head>
+  <body>
+  <div id="page" class="page"><!-- mian-content -->
+    {% load crispy_forms_filters %}
+    {% load crispy_forms_tags %}
+    <div class="login">
+    {% block header %}
+        {% include "include/homeHeader.html" %}
+    {% endblock header %}
+    <div class="container">
+    {% if messages %}
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+              </div>
+            {% endfor %}
+    {% endif %}
+    </div>
+    <div class="regist_block container">
+      <img src="{% static 'img/girl_donat.png' %}" class="welcome_img" alt="">
+      <div class="regist_block_form">
+        <h2 class="regist_title">Авторизация</h2>
+        <div class="regist_form_block red_form">
+            <form method="POST">
+            {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="auth_btn red">Войти</button>
+            </form>
+          <span class="not_yet red_yet">У вас еще нет аккаунта? <a href="{% url 'register' %}">Зарегистрироваться</a></span>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </div>
+</body>
+</html>

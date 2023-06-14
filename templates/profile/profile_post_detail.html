@@ -1,0 +1,23 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+    <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="donat_posts">
+            <p class="profile_title title_detail">{{ post_info.title}}</p>
+            <div class="another_info">
+                <img src="{{ post_info.image_post.url }}" class="post_detail_img" alt="">
+                <div class="another_info_text">
+                    <p class="date_publish">Дата публикации: {{ post_info.created_on }}</p>
+                    <p class="publish_text">{{ post_info.content }}</p>
+                    <p class="status {% if post_info.get_status_display == 'Опубликовано' %}publish{% elif post_info.get_status_display == 'Черновик' %}draft{% else %}moderator{% endif %}">{{ post_info.get_status_display }}</p>
+                </div>
+            </div>
+            <div class="btn_choice">
+                <a href="{% url 'delete_post' post_info.id %}" class="delete_btn">Удалить публикацию</a>
+                <a href="{% url 'edit_post' post_info.id %}" class="edit_btn">Редактировать публикацию</a>
+            </div>
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

@@ -1,0 +1,48 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+    <div class="profile_block">
+    <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="donat_posts">
+            <div class="good_info_profile">
+                <p class="profile_title title_detail detail_name">Название товара: {{ good_info.name}}</p>
+                <div class="another_info">
+                    <img src="{{ good_info.image_good.url }}" class="post_detail_img" alt="">
+                    <div class="another_info_text">
+                        <p class="date_publish type_name">Категория: {{ good_info.category.cat_name }}</p>
+                        <p class="date_publish type_name">Тип: {{ good_info.type.type_name }}</p>
+                        <p class="publish_text">{{ good_info.description }}</p>
+                        <p class="status {% if good_info.get_status_display == 'Опубликовано' %}publish{% elif good_info.get_status_display == 'Черновик' %}draft{% else %}moderator{% endif %}">{{ good_info.get_status_display }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="filling_info">
+                <div class="filling_header_block">
+                    <p class="filling_title">Начинки к товару</p>
+                    <a href="{% url 'add_filling' %}" class="add_new">Добавить новую  +</a>
+                </div>
+                <div class="fillings_block">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% for fil in fil_list %}
+                            <div class="fil_item">
+                                <img src="{{ fil.image.url }}" class="fil_img" alt="">
+                                <p class="fil_name">{{ fil.name }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="btn_choice">
+                <a href="{% url 'delete_good' good_info.id %}" class="delete_btn">Удалить товар</a>
+                <a href="{% url 'edit_good' good_info.id %}" class="edit_btn">Редактировать товар</a>
+            </div>
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

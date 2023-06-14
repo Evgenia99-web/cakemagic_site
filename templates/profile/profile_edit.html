@@ -1,0 +1,32 @@
+{% extends 'profile/profile.html' %}
+{% load static %}
+{% block profile %}
+     {% load crispy_forms_filters %}
+    {% load crispy_forms_tags %}
+    <div class="profile_block">
+        <img src="{% static 'img/donat_profile_top.png' %}" class="profile_donat_top" alt="">
+        <div class="edit_profile donat_posts">
+            <p class="profile_title">Редактирование профиля</p>
+            {% if messages %}
+                    {% for message in messages %}
+                      <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                      </div>
+                    {% endfor %}
+            {% endif %}
+            <form class="edit_form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="edit_form_profile">
+                    {{ u_form|crispy }}
+                    {% if user.is_cooker %}
+                        {{ cook_form|crispy }}
+                    {% else %}
+                        {{ cust_form|crispy }}
+                    {% endif %}
+                </div>
+                <button class="auth_btn" type="submit">Обновить профиль</button>
+            </form>
+        </div>
+        <img src="{% static 'img/donat_profile_bottom.png' %}" class="profile_donat_bottom" alt="">
+    </div>
+{% endblock profile %}

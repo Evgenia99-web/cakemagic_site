@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="cookers_top">
+        <div class="container">
+          <h1 class="home_title blue">Публикации</h1>
+        </div>
+        <div class="container cooker_list_block">
+          <div class="post_list">
+              {% for post in page_obj %}
+                  <div class="post_item post_item_page">
+                      <img src="{{ post.image_post.url }}" class="post_item_img" alt="">
+                      <a href="{% url 'post_single' post.id %}" class="main_go_to">Перейти</a>
+                  </div>
+              {% endfor %}
+          </div>
+        {% include 'include/pagination.html' %}
+        </div>
+    </div>
+{% endblock base %}

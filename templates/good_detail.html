@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="container">
+        <div class="cooker_info">
+            <div class="cooker_ava">
+              <img src="{{ good_info.image_good.url }}" class="cooker_photo_detail" alt="">
+            </div>
+            <div class="cooker_info_text">
+              <p class="cooker_name_detail good_title">{{ good_info.type.type_name }}  "{{ good_info.name }}"</p>
+              <p class="cooker_location good_cat">Категория: {{ good_info.category.cat_name}}</p>
+              <p class="cooker_descript">{{ good_info.description }}</p>
+                <p class="cooker_descript add_info">Для того, чтобы рассчитать примерную стоимость, выберете начинку и укажите нужный вес / количество.</p>
+            </div>
+        </div>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="filling_block">
+                <p class="profile_title">Выберете начинку:</p>
+                <div class="filling_list">
+                    <div class="wrapper">
+                        <div class="tabs filling_tabs">
+                            {% for fil in filling_list %}
+                                <div class="fil_tab">
+                                  <input type="radio" name="fil_price" id="tab-{{ fil.id }}" value="{{ fil.id }}" {% if forloop.first %} checked{% endif %} class="tab-switch">
+                                    <label for="tab-{{ fil.id }}" class="fil_label">
+                                          <img src="{{ fil.image.url }}" class="fil_img" alt="">
+                                          <p class="fil_name">{{ fil.name }}</p>
+                                    </label>
+                                  <div class="tab-content fil_tab_content">
+                                    <p class="fil_content">{{ fil.description }}</p>
+                                  </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="count_sum">
+                <div class="good_weight">
+                    <p class="profile_title">Укажите нужный вес / количество:</p>
+                    <input type="number" step="0.1" min="1" name="weight" id="weight" class="weight" placeholder="Введите вес или количество товара">
+                    <label for="weight" class="helptext">
+                        Вы можете указывать вес торта с шагом в 0.2 кг.
+                        Количество другого товара определяется в шт.
+                    </label>
+                    <button type="submit" class="count_btn">Рассчитать</button>
+                </div>
+                <div class="good_sum">
+                    <p class="profile_title">Примерная стоимость за <span class="count_good" id="count">{{ weight }}</span>{% if good_info.type.id == 1 %} кг{% else %} шт{% endif %}:</p>
+                    <div class="count_info">
+                        <p class="info_good">{{ good_info.type.type_name }} "{{ good_info.name }}", начинка: {{ fil_name }}</p>
+                        <p class="total_price">{{ total_price }} Р</p>
+                    </div>
+                    <a href="{% url 'basket_add' good_info.id fil_id weight %}" class="count_btn">Добавить в корзину</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById("weight" ).onchange = function(){
+           document.getElementById("count").innerHTML = this.value;
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+{% endblock base %}

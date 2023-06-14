@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block base %}
+    <div class="cart_block container">
+        <h1 class="home_title">Корзина</h1>
+        {% if basket %}
+            <table class="basket_table">
+                <thead>
+                    <tr class="basket_row">
+                        <th class="basket_row_header">Товар</th>
+                        <th class="basket_row_header">Начинка</th>
+                        <th class="basket_row_header">Вес, кг / Количество, шт</th>
+                        <th class="basket_row_header">Ориентировочная стоимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart in basket %}
+                        <tr class="basket_row">
+                            <td class="product_basket">
+                                <img src="{{ cart.product.image_good.url }}" class="product_basket_img" alt="">
+                                <p class="product_basket_name">{{ cart.product.type.type_name }} "{{ cart.product.name }}"</p>
+                            </td>
+                            <td class="filling_basket">{{ cart.filling.name }}</td>
+                            <td class="count_product_basket">{{ cart.quantity }}</td>
+                            <td class="total_price_product">{{ cart.sum }} Р <a href="{% url 'basket_delete' cart.id %}" class="btn_delete_link"><img src="{% static 'img/delete_cart.png' %}" class="btn_delete" alt=""></a>
+
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr class="basket_row">
+                        <td class="end_title">Предварительный итог</td>
+                        <td colspan="2" class="total_table_price">{{ basket.total_sum }} Р</td>
+                        <td class="confirm_btn_table"><a href="{% url 'create_order' basket.total_sum %}" class="confirm_btn">Оформить заказ</a> </td>
+                    </tr>
+                </tfoot>
+            </table>
+        {% else %}
+            <p class="clear_basket">Корзина пуста</p>
+        {% endif %}
+    </div>
+{% endblock base %}

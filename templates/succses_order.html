@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Спвсибо за заказ</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css" media="all">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+  </head>
+  <body>
+  <div id="page" class="page success_block"><!-- mian-content -->
+    <div class="suc_block">
+        {% block header %}
+            {% include "include/header.html" %}
+        {% endblock header %}
+    <div class="container">
+        <h1 class="thanks_title">Спасибо большое <br>за заказ!</h1>
+        <p class="thanks_descript">
+            Ваш заказ передан кондитеру и в скором времени он свяжется с вами для уточнения деталей и согласования цены.
+            Узнать статус заказа Вы можете в личном кабинете.
+        </p>
+        <a href="{% url 'profile' %}" class="thanks_btn">Перейти в личный кабинет</a>
+    </div>
+     </div>
+  </div>
+</body>
+</html>
