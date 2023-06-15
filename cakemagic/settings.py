@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-3u+0dj)l69pfupv%jr$fes@%=z$ba5^9z(&$c_to7*7^2pq(&x
 DEBUG = True
 AUTH_USER_MODEL = 'site_cake.User'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','http://magic-cake.std-1944.ist.mospolytech.ru/', 'magic-cake.std-1944.ist.mospolytech.ru', '127.0.0.1',]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Application definition
